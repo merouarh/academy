@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="أكاديمية تحقيق الطموح - دعم مدرسي لجميع المستويات الابتدائية والمتوسطة والثانوية في الشلف، الجزائر" />
+  <title>أكاديمية تحقيق الطموح</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --pink: #EC1B77;
+      --sky: #0091D2;
+      --dark-blue: #0059A1;
+      --orange: #FF8200;
+      --gold: #FFB500;
+      --light-pink: #F05A94;
+      --white: #FFFFFF;
+      --bg: #F8FAFF;
+      --text: #1a1a2e;
+      --text-light: #5a6a8a;
+      --border: #e8edf5;
+      --shadow: 0 8px 32px rgba(0,89,161,0.10);
+      --shadow-md: 0 16px 48px rgba(0,89,161,0.14);
+      --radius: 18px;
+      --radius-sm: 10px;
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 2px solid transparent;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+    #navbar.scrolled {
+      box-shadow: 0 4px 24px rgba(0,89,161,0.12);
+      border-color: var(--border);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-text .t1 { font-size: 13px; font-weight: 700; color: var(--dark-blue); display: block; }
+    .nav-logo-text .t2 { font-size: 11px; font-weight: 500; color: var(--text-light); display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { background: rgba(0,145,210,0.08); color: var(--sky); }
+
+    .nav-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .btn-whatsapp-nav {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 7px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      transition: transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+    .btn-whatsapp-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border: none; background: none;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      width: 26px; height: 2.5px;
+      background: var(--dark-blue);
+      border-radius: 2px;
+      transition: var(--transition);
+      display: block;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      z-index: 999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      max-height: calc(100vh - 72px);
+      overflow-y: auto;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; padding: 0 20px; }
+    .mobile-menu ul li { border-bottom: 1px solid var(--border); }
+    .mobile-menu ul li:last-child { border: none; }
+    .mobile-menu ul a {
+      display: block;
+      padding: 14px 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .mobile-menu .mob-cta {
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      padding: 100px 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f0f7ff 0%, #fff5fb 50%, #f0f9ff 100%);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-blob:nth-child(1) { width: 500px; height: 500px; background: var(--pink); top: -10%; right: -10%; animation-delay: 0s; }
+    .hero-blob:nth-child(2) { width: 400px; height: 400px; background: var(--sky); bottom: -5%; left: -5%; animation-delay: 3s; }
+    .hero-blob:nth-child(3) { width: 300px; height: 300px; background: var(--gold); top: 30%; left: 20%; animation-delay: 5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+    .hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+    .shape { position: absolute; opacity: 0.07; }
+    .shape-circle { border-radius: 50%; border: 3px solid var(--dark-blue); }
+    .shape-1 { width: 200px; height: 200px; top: 10%; right: 15%; }
+    .shape-2 { width: 120px; height: 120px; bottom: 20%; left: 10%; border-color: var(--pink); }
+    .shape-3 { width: 80px; height: 80px; top: 60%; right: 5%; border-color: var(--gold); }
+
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(236,27,119,0.08);
+      border: 1.5px solid rgba(236,27,119,0.2);
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.7s ease both;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s 0.1s ease both;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--pink), var(--dark-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+    .hero-subtitle span { color: var(--sky); font-weight: 700; }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      animation: fadeInUp 0.8s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn-wa {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(37,211,102,0.45); }
+    .btn-call {
+      background: linear-gradient(135deg, var(--sky), var(--dark-blue));
+      color: white;
+      box-shadow: 0 8px 28px rgba(0,89,161,0.28);
+    }
+    .btn-call:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,89,161,0.38); }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 56px;
+      animation: fadeInUp 0.8s 0.5s ease both;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 20px 28px;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      min-width: 110px;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--pink), var(--dark-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label { font-size: 11px; font-weight: 600; color: var(--text-light); margin-top: 4px; }
+
+    /* ─── FLOAT WA ─── */
+    .float-wa {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 500;
+      width: 58px; height: 58px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; color: white;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+      transition: transform var(--transition), box-shadow var(--transition);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    .float-wa:hover { transform: scale(1.1); box-shadow: 0 10px 36px rgba(37,211,102,0.6); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 6px 36px rgba(37,211,102,0.8), 0 0 0 10px rgba(37,211,102,0.1); }
+    }
+
+    /* ─── SECTIONS COMMON ─── */
+    section { padding: 90px 24px; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-desc {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-light);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-desc { margin: 0 auto; }
+
+    /* ─── ABOUT ─── */
+    #about { background: linear-gradient(135deg, #f8f9ff, #fff5fb); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-visual { position: relative; border-radius: var(--radius); overflow: visible; }
+    .about-card-big {
+      background: linear-gradient(135deg, var(--dark-blue), var(--pink));
+      border-radius: var(--radius);
+      padding: 50px 40px;
+      color: white;
+      text-align: center;
+    }
+    .about-card-big .icon-big { font-size: 80px; margin-bottom: 20px; display: block; }
+    .about-card-big h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 12px; }
+    .about-card-big p { font-size: 15px; opacity: 0.9; line-height: 1.7; }
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 110px; height: 110px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white; text-align: center;
+      box-shadow: 0 8px 24px rgba(255,181,0,0.4);
+      z-index: 2;
+    }
+    .about-badge .num { font-size: 2rem; font-weight: 900; line-height: 1; }
+    .about-badge .txt { font-size: 10px; font-weight: 700; }
+
+    .about-features { display: flex; flex-direction: column; gap: 20px; }
+    .about-feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: white;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border-right: 4px solid var(--pink);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .about-feat:hover { transform: translateX(-5px); box-shadow: var(--shadow-md); }
+    .about-feat-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .about-feat h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .about-feat p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* ─── TEAM ─── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .team-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 5px;
+    }
+    .team-card:nth-child(1)::before { background: linear-gradient(90deg, var(--pink), var(--light-pink)); }
+    .team-card:nth-child(2)::before { background: linear-gradient(90deg, var(--sky), var(--dark-blue)); }
+    .team-card:nth-child(3)::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: white;
+    }
+    .team-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
+    .team-role {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .team-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* ─── LEVELS ─── */
+    #levels { background: var(--bg); }
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .level-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .level-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .level-header {
+      padding: 32px 28px;
+      text-align: center;
+      color: white;
+    }
+    .level-icon { font-size: 3.5rem; display: block; margin-bottom: 12px; }
+    .level-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
+    .level-sub { font-size: 13px; opacity: 0.9; font-weight: 500; }
+    .level-body { background: white; padding: 24px 28px; }
+    .level-years { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .year-tag {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1.5px solid;
+    }
+    .level-subjects { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+    .level-subjects strong { color: var(--text); }
+
+    /* ─── ACTIVITIES ─── */
+    .carousel-wrapper { position: relative; overflow: hidden; border-radius: var(--radius); }
+    .carousel-track { display: flex; transition: transform 0.5s ease; }
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 16/7;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slide-content {
+      text-align: center;
+      color: white;
+      padding: 40px;
+      z-index: 2;
+      position: relative;
+    }
+    .slide-content .slide-icon { font-size: 4rem; display: block; margin-bottom: 16px; }
+    .slide-content h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .slide-content p { font-size: 14px; opacity: 0.9; }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      font-size: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .carousel-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--dark-blue);
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .carousel-btn:hover { background: var(--dark-blue); color: white; border-color: var(--dark-blue); }
+    .carousel-dots { display: flex; gap: 8px; }
+    .carousel-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .carousel-dot.active { background: var(--pink); transform: scale(1.3); }
+
+    /* ─── LOCATION ─── */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .location-info { display: flex; flex-direction: column; gap: 20px; }
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: white;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+    }
+    .info-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .info-item h4 { font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 4px; }
+    .info-item p { font-size: 15px; font-weight: 700; }
+    .info-item a { text-decoration: none; color: var(--text); }
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 3px solid var(--border);
+    }
+    .map-container iframe { width: 100%; height: 380px; border: none; display: block; }
+    .btn-directions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--sky), var(--dark-blue));
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(0,89,161,0.28);
+      transition: transform var(--transition), box-shadow var(--transition);
+      margin-top: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-directions:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,89,161,0.38); }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-carousel { position: relative; overflow: hidden; }
+    .testi-track {
+      display: flex;
+      gap: 28px;
+      transition: transform 0.5s ease;
+    }
+    .testi-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .testi-stars { color: var(--gold); font-size: 18px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testi-text { font-size: 14px; line-height: 1.8; color: var(--text-light); margin-bottom: 20px; font-style: italic; }
+    .testi-text::before { content: '"'; font-size: 3rem; color: var(--pink); opacity: 0.2; line-height: 0; vertical-align: -20px; margin-left: 4px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .testi-name { font-size: 14px; font-weight: 800; }
+    .testi-role { font-size: 12px; color: var(--text-light); }
+
+    /* ─── FAQ ─── */
+    .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item {
+      background: white;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow var(--transition);
+    }
+    .faq-item:hover { box-shadow: var(--shadow-md); }
+    .faq-q {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      user-select: none;
+    }
+    .faq-q-text { display: flex; align-items: center; gap: 12px; }
+    .faq-q-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(236,27,119,0.08);
+      color: var(--pink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .faq-arrow {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: var(--text-light);
+      transition: transform var(--transition), background var(--transition);
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--pink); color: white; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 24px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .contact-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .contact-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .contact-card-icon {
+      width: 70px; height: 70px;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 18px;
+    }
+    .contact-card h4 { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; }
+    .contact-card .val { font-size: 17px; font-weight: 800; color: var(--text); }
+    .contact-card a { text-decoration: none; color: var(--text); transition: color var(--transition); }
+    .contact-card a:hover { color: var(--pink); }
+    .contact-wa-section { margin-top: 48px; text-align: center; }
+    .btn-wa-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 44px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 36px rgba(37,211,102,0.35);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-wa-big:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(37,211,102,0.45); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: linear-gradient(135deg, var(--dark-blue), #001a4f);
+      color: white;
+      padding: 60px 24px 30px;
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .footer-brand .logo-icon {
+      width: 50px; height: 50px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .footer-brand h3 { font-size: 1.1rem; font-weight: 800; }
+    .footer-brand p { font-size: 13px; opacity: 0.75; line-height: 1.7; margin-bottom: 20px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 16px;
+      transition: background var(--transition), transform var(--transition);
+      text-decoration: none;
+    }
+    .social-link:hover { background: var(--pink); transform: translateY(-3px); }
+    .footer-col h4 { font-size: 14px; font-weight: 800; margin-bottom: 18px; opacity: 0.9; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; transition: color var(--transition); }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      opacity: 0.65;
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-content { max-width: 90vw; max-height: 90vh; border-radius: var(--radius); overflow: hidden; position: relative; }
+    .lightbox-content .lb-inner {
+      width: 600px; max-width: 90vw;
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius);
+      font-size: 6rem;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 24px; left: 24px;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.15);
+      border: none; border-radius: 50%;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE: TABLET ─── */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 50px; }
+      .about-visual { max-width: 500px; margin: 0 auto; width: 100%; }
+      .location-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .levels-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    }
+
+    /* ─── RESPONSIVE: MOBILE ─── */
+    @media (max-width: 768px) {
+      section { padding: 60px 20px; }
+      .section-header { margin-bottom: 36px; }
+
+      /* Navbar */
+      .nav-links { display: none; }
+      .btn-whatsapp-nav { display: none; }
+      .hamburger { display: flex; }
+
+      /* Hero */
+      #hero { padding: 90px 20px 50px; min-height: auto; }
+      .hero-badge { font-size: 12px; padding: 6px 14px; }
+      .hero-stats { gap: 12px; }
+      .stat-item { padding: 14px 18px; min-width: 90px; }
+      .stat-num { font-size: 1.6rem; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn-primary { width: 100%; max-width: 300px; justify-content: center; }
+
+      /* About */
+      .about-feat { gap: 12px; padding: 16px; }
+      .about-badge { width: 85px; height: 85px; bottom: -15px; right: -10px; }
+      .about-badge .num { font-size: 1.5rem; }
+
+      /* Team */
+      .team-grid { grid-template-columns: 1fr; }
+
+      /* Levels */
+      .levels-grid { grid-template-columns: 1fr; max-width: 100%; }
+
+      /* Activities */
+      .carousel-slide { aspect-ratio: 16/9; }
+      .slide-content h3 { font-size: 1.2rem; }
+      .slide-content p { font-size: 13px; }
+      .slide-content .slide-icon { font-size: 2.5rem; }
+
+      /* Location */
+      .map-container iframe { height: 280px; }
+
+      /* Testimonials */
+      /* handled by JS */
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      /* Contact */
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .btn-wa-big { padding: 15px 28px; font-size: 15px; }
+
+      /* Float WA */
+      .float-wa { width: 50px; height: 50px; font-size: 22px; bottom: 20px; left: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-stats { justify-content: center; }
+      .stat-item { min-width: 80px; padding: 12px 14px; }
+      .stat-num { font-size: 1.4rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .about-card-big { padding: 36px 24px; }
+      .about-card-big .icon-big { font-size: 56px; }
+      .about-card-big h3 { font-size: 1.4rem; }
+      .team-card { padding: 28px 20px; }
+      .faq-q { font-size: 14px; padding: 16px 18px; }
+      .faq-q-text { gap: 8px; }
+      .section-title { font-size: 1.5rem; }
+      .footer-grid { gap: 24px; }
+      .btn-wa-big { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/213665603281" target="_blank" class="float-wa" title="تواصل عبر واتساب">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <img src="https://res.cloudinary.com/dbh0mkfhe/image/upload/v1778172675/1000048757-removebg-preview_qr4x6a.png" alt="أكاديمية تحقيق الطموح Logo" />
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#levels">المستويات</a></li>
+      <li><a href="#subjects">المواد</a></li>
+      <li><a href="#activities">الأنشطة</a></li>
+      <li><a href="#testimonials">الآراء</a></li>
+      <li><a href="#contact">تواصل معنا</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://wa.me/213665603281" target="_blank" class="btn-whatsapp-nav">
+        <i class="fab fa-whatsapp"></i> واتساب
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMobileMenu()">من نحن</a></li>
+    <li><a href="#team" onclick="closeMobileMenu()">المسؤولون</a></li>
+    <li><a href="#levels" onclick="closeMobileMenu()">المستويات</a></li>
+    <li><a href="#subjects" onclick="closeMobileMenu()">المواد</a></li>
+    <li><a href="#activities" onclick="closeMobileMenu()">الأنشطة</a></li>
+    <li><a href="#location" onclick="closeMobileMenu()">الموقع</a></li>
+    <li><a href="#testimonials" onclick="closeMobileMenu()">آراء الأولياء</a></li>
+    <li><a href="#faq" onclick="closeMobileMenu()">الأسئلة الشائعة</a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()">تواصل معنا</a></li>
+  </ul>
+  <div class="mob-cta">
+    <a href="https://wa.me/213665603281" target="_blank" class="btn-primary btn-wa" onclick="closeMobileMenu()">
+      <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+    </a>
+    <a href="tel:0665603281" class="btn-primary btn-call" onclick="closeMobileMenu()">
+      <i class="fas fa-phone"></i> اتصال مباشر
+    </a>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob"></div>
+    <div class="hero-blob"></div>
+    <div class="hero-blob"></div>
+  </div>
+  <div class="hero-shapes">
+    <div class="shape shape-circle shape-1"></div>
+    <div class="shape shape-circle shape-2"></div>
+    <div class="shape shape-circle shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-star"></i> أكاديمية الدعم المدرسي الأولى في المنطقة
+    </div>
+    <h1 class="hero-title">
+      <span class="gradient-text">أكاديمية تحقيق الطموح</span>
+    </h1>
+    <p class="hero-subtitle">
+      <span>تعلم</span> • <span>تطوير</span> • <span>تميز</span><br>
+      نجاح يصنع الفرق
+    </p>
+    <div class="hero-cta">
+      <a href="https://wa.me/213665603281" target="_blank" class="btn-primary btn-wa">
+        <i class="fab fa-whatsapp" style="font-size:20px"></i>
+        تواصل عبر واتساب
+      </a>
+      <a href="tel:0665603281" class="btn-primary btn-call">
+        <i class="fas fa-phone" style="font-size:18px"></i>
+        اتصال مباشر
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">مستويات دراسية</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">مواد دراسية</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-label">سنة خبرة</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">متابعة فردية</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-big">
+          <span class="icon-big">🏫</span>
+          <h3>أكاديمية تحقيق الطموح</h3>
+          <p>وجهتك الأولى للتميز الأكاديمي وتطوير المهارات الدراسية في قلب ولاية الشلف</p>
+        </div>
+        <div class="about-badge">
+          <span class="num">★</span>
+          <span class="txt">الأفضل</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag reveal" style="background:rgba(236,27,119,0.08); color:var(--pink);">
+          <i class="fas fa-info-circle"></i> من نحن
+        </div>
+        <h2 class="section-title reveal">نبني الأجيال ونصنع النجاح</h2>
+        <p class="section-desc reveal" style="margin-bottom: 36px;">
+          أكاديمية تعليمية متخصصة تهدف إلى دعم التلاميذ في جميع المستويات وتحسين نتائجهم الدراسية عبر طرق حديثة وبسيطة ومجربة، مع متابعة دقيقة ومستمرة لكل تلميذ.
+        </p>
+        <div class="about-features">
+          <div class="about-feat reveal reveal-delay-1">
+            <div class="about-feat-icon" style="background:rgba(236,27,119,0.1); color:var(--pink);">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div>
+              <h4>أساليب تدريس حديثة</h4>
+              <p>نعتمد على أحدث المناهج والطرق التربوية لضمان فهم عميق ودائم للمادة.</p>
+            </div>
+          </div>
+          <div class="about-feat reveal reveal-delay-2">
+            <div class="about-feat-icon" style="background:rgba(0,145,210,0.1); color:var(--sky);">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <div>
+              <h4>متابعة فردية مستمرة</h4>
+              <p>نتابع كل تلميذ بشكل شخصي لضمان تقدمه وتجاوزه للصعوبات الدراسية.</p>
+            </div>
+          </div>
+          <div class="about-feat reveal reveal-delay-3">
+            <div class="about-feat-icon" style="background:rgba(255,181,0,0.1); color:var(--gold);">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div>
+              <h4>نتائج مضمونة</h4>
+              <p>سجل نجاح حقيقي يتحدث عنه تلاميذنا وأولياؤهم في المنطقة كلها.</p>
+            </div>
+          </div>
+          <div class="about-feat reveal reveal-delay-4">
+            <div class="about-feat-icon" style="background:rgba(255,130,0,0.1); color:var(--orange);">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div>
+              <h4>بيئة داعمة وآمنة</h4>
+              <p>نوفر جواً دراسياً مريحاً يشجع التلميذ على التعلم والنمو بثقة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEAM ─── -->
+<section id="team" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(0,145,210,0.08); color:var(--sky);">
+        <i class="fas fa-users"></i> فريقنا
+      </div>
+      <h2 class="section-title reveal">المسؤولون والكادر التعليمي</h2>
+      <p class="section-desc reveal">نخبة من الأساتذة المتخصصين ذوي الخبرة والكفاءة العالية لضمان أفضل تعليم</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar" style="background:linear-gradient(135deg,var(--pink),var(--light-pink))">م</div>
+        <div class="team-name">مدير الأكاديمية</div>
+        <div class="team-role" style="background:rgba(236,27,119,0.1); color:var(--pink);">المؤسس والمدير</div>
+        <p class="team-desc">خبرة واسعة في مجال التعليم والدعم المدرسي، يسهر على الجودة ومستوى التلاميذ باستمرار.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-avatar" style="background:linear-gradient(135deg,var(--sky),var(--dark-blue))">أ</div>
+        <div class="team-name">المشرف التربوي</div>
+        <div class="team-role" style="background:rgba(0,145,210,0.1); color:var(--sky);">مشرف بيداغوجي</div>
+        <p class="team-desc">متخصص في المناهج الدراسية والطرق التعليمية الحديثة، يتابع مستوى الأساتذة والتلاميذ.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-avatar" style="background:linear-gradient(135deg,var(--gold),var(--orange))">ف</div>
+        <div class="team-name">مسؤول التواصل</div>
+        <div class="team-role" style="background:rgba(255,181,0,0.1); color:#c97a00;">التواصل والمتابعة</div>
+        <p class="team-desc">حلقة الوصل بين الأكاديمية وأولياء الأمور، يضمن متابعة مستمرة وشفافة لكل التلاميذ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LEVELS ─── -->
+<section id="levels">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(0,89,161,0.08); color:var(--dark-blue);">
+        <i class="fas fa-graduation-cap"></i> البرامج
+      </div>
+      <h2 class="section-title reveal">المستويات الدراسية</h2>
+      <p class="section-desc reveal">نغطي جميع المراحل الدراسية بمناهج مخصصة لكل مستوى</p>
+    </div>
+    <div class="levels-grid">
+      <div class="level-card reveal reveal-delay-1">
+        <div class="level-header" style="background:linear-gradient(135deg,#0091D2,#0059A1)">
+          <span class="level-icon">📘</span>
+          <div class="level-title">المرحلة الابتدائية</div>
+          <div class="level-sub">أساس متين لمستقبل مشرق</div>
+        </div>
+        <div class="level-body">
+          <div class="level-years">
+            <span class="year-tag" style="border-color:var(--sky); color:var(--sky); background:rgba(0,145,210,0.06)">السنة 1</span>
+            <span class="year-tag" style="border-color:var(--sky); color:var(--sky); background:rgba(0,145,210,0.06)">السنة 2</span>
+            <span class="year-tag" style="border-color:var(--sky); color:var(--sky); background:rgba(0,145,210,0.06)">السنة 3</span>
+            <span class="year-tag" style="border-color:var(--sky); color:var(--sky); background:rgba(0,145,210,0.06)">السنة 4</span>
+            <span class="year-tag" style="border-color:var(--sky); color:var(--sky); background:rgba(0,145,210,0.06)">السنة 5</span>
+          </div>
+          <p class="level-subjects"><strong>المواد:</strong> رياضيات، لغة عربية، فرنسية، علوم الطبيعة، تربية إسلامية</p>
+        </div>
+      </div>
+      <div class="level-card reveal reveal-delay-2">
+        <div class="level-header" style="background:linear-gradient(135deg,#EC1B77,#0059A1)">
+          <span class="level-icon">📗</span>
+          <div class="level-title">المرحلة المتوسطة</div>
+          <div class="level-sub">بناء الكفاءات وتعزيز الفهم</div>
+        </div>
+        <div class="level-body">
+          <div class="level-years">
+            <span class="year-tag" style="border-color:var(--pink); color:var(--pink); background:rgba(236,27,119,0.06)">السنة 1 م</span>
+            <span class="year-tag" style="border-color:var(--pink); color:var(--pink); background:rgba(236,27,119,0.06)">السنة 2 م</span>
+            <span class="year-tag" style="border-color:var(--pink); color:var(--pink); background:rgba(236,27,119,0.06)">السنة 3 م</span>
+            <span class="year-tag" style="border-color:var(--pink); color:var(--pink); background:rgba(236,27,119,0.06)">السنة 4 م</span>
+          </div>
+          <p class="level-subjects"><strong>المواد:</strong> رياضيات، فيزياء، علوم، لغة عربية، فرنسية، إنجليزية</p>
+        </div>
+      </div>
+      <div class="level-card reveal reveal-delay-3">
+        <div class="level-header" style="background:linear-gradient(135deg,#FF8200,#EC1B77)">
+          <span class="level-icon">📕</span>
+          <div class="level-title">المرحلة الثانوية</div>
+          <div class="level-sub">التحضير للنجاح في البكالوريا</div>
+        </div>
+        <div class="level-body">
+          <div class="level-years">
+            <span class="year-tag" style="border-color:var(--orange); color:var(--orange); background:rgba(255,130,0,0.06)">السنة 1 ث</span>
+            <span class="year-tag" style="border-color:var(--orange); color:var(--orange); background:rgba(255,130,0,0.06)">السنة 2 ث</span>
+            <span class="year-tag" style="border-color:var(--orange); color:var(--orange); background:rgba(255,130,0,0.06)">السنة 3 ث</span>
+          </div>
+          <p class="level-subjects"><strong>المواد:</strong> رياضيات، فيزياء، علوم طبيعية، لغة عربية، فرنسية، إنجليزية</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACTIVITIES ─── -->
+<section id="activities" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(236,27,119,0.08); color:var(--pink);">
+        <i class="fas fa-camera"></i> الأنشطة
+      </div>
+      <h2 class="section-title reveal">أحدث الأنشطة والفعاليات</h2>
+      <p class="section-desc reveal">نواكب مسيرة تلاميذنا بأنشطة تعليمية وترفيهية متنوعة</p>
+    </div>
+    <div class="carousel-wrapper reveal">
+      <div class="carousel-track" id="activitiesTrack">
+        <div class="carousel-slide" style="background:linear-gradient(135deg,#0059A1,#EC1B77)">
+          <div class="slide-bg">📚</div>
+          <div class="slide-content">
+            <span class="slide-icon">🏆</span>
+            <h3>يوم التكريم السنوي</h3>
+            <p>تكريم المتفوقين والمجتهدين من تلاميذ الأكاديمية</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background:linear-gradient(135deg,#FF8200,#FFB500)">
+          <div class="slide-bg">🎓</div>
+          <div class="slide-content">
+            <span class="slide-icon">📝</span>
+            <h3>مراجعة امتحانات الفصل</h3>
+            <p>جلسات مكثفة للتحضير لاختبارات الفصل الثاني</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background:linear-gradient(135deg,#0091D2,#0059A1)">
+          <div class="slide-bg">⭐</div>
+          <div class="slide-content">
+            <span class="slide-icon">🎯</span>
+            <h3>ورشة تعليمية مفتوحة</h3>
+            <p>ورشة تفاعلية مجانية للتلاميذ الجدد</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="actPrev"><i class="fas fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="actDots">
+        <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+        <div class="carousel-dot" onclick="goToSlide(1)"></div>
+        <div class="carousel-dot" onclick="goToSlide(2)"></div>
+      </div>
+      <button class="carousel-btn" id="actNext"><i class="fas fa-chevron-left"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOCATION ─── -->
+<section id="location">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag reveal" style="background:rgba(0,89,161,0.08); color:var(--dark-blue);">
+        <i class="fas fa-map-marker-alt"></i> الموقع
+      </div>
+      <h2 class="section-title reveal">كيف تصل إلينا</h2>
+      <p class="section-desc reveal">نحن في انتظارك في قلب منطقة أولاد بن عبد القادر، الشلف</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <div class="info-item reveal reveal-delay-1">
+          <div class="info-icon" style="background:rgba(236,27,119,0.1); color:var(--pink);">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h4>العنوان</h4>
+            <p>أولاد بن عبد القادر، الشلف، الجزائر</p>
+          </div>
+        </div>
+        <div class="info-item reveal reveal-delay-2">
+          <div class="info-icon" style="background:rgba(0,145,210,0.1); color:var(--sky);">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <h4>الهاتف</h4>
+            <p><a href="tel:0665603281">0665603281</a></p>
+          </div>
+        </div>
+        <div class="info-item reveal reveal-delay-3">
+          <div class="info-icon" style="background:rgba(255,181,0,0.1); color:var(--gold);">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div>
+            <h4>أوقات العمل</h4>
+            <p>السبت – الخميس: 8:00ص – 8:00م</p>
+          </div>
+        </div>
+        <a href="https://maps.app.goo.gl/bWLys68n3xvjgfVG7" target="_blank" class="btn-directions reveal reveal-delay-4">
+          <i class="fas fa-directions"></i> احصل على الاتجاهات
+        </a>
+      </div>
+      <div class="map-container reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d307.23646102747443!2d1.275250553831656!3d36.02589424154022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sdz!4v1778171627645!5m2!1sfr!2sdz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section id="testimonials" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(255,181,0,0.1); color:#c97a00;">
+        <i class="fas fa-star"></i> الآراء
+      </div>
+      <h2 class="section-title reveal">آراء أولياء الأمور</h2>
+      <p class="section-desc reveal">ما يقوله أولياء التلاميذ عن تجربتهم مع أكاديميتنا</p>
+    </div>
+    <div class="testimonials-carousel reveal">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">ابنتي تحسّن مستواها في الرياضيات بشكل ملحوظ منذ التحاقها بالأكاديمية. الأستاذ يشرح بطريقة رائعة ومبسطة جداً.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--pink),var(--light-pink))">أ</div>
+            <div>
+              <div class="testi-name">أم كمال</div>
+              <div class="testi-role">ولية أمر تلميذة – السنة 4 متوسط</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">نتائج ابني تحسّنت من 8 إلى 15 في الفيزياء خلال فصل واحد فقط! الأكاديمية تستحق كل الثقة والاحترام.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--sky),var(--dark-blue))">م</div>
+            <div>
+              <div class="testi-name">السيد محمد</div>
+              <div class="testi-role">ولي أمر تلميذ – السنة 3 ثانوي</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">المتابعة الفردية التي توفرها الأكاديمية لا مثيل لها. ابنتي أصبحت تحب الدراسة وتذهب إليها بكل سعادة.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--gold),var(--orange))">ف</div>
+            <div>
+              <div class="testi-name">أم ياسمين</div>
+              <div class="testi-role">ولية أمر تلميذة – السنة 5 ابتدائي</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">بيئة دراسية جيدة وأساتذة متخصصون. أوصي كل ولي أمر بتسجيل أبنائه في هذه الأكاديمية المتميزة.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--pink),var(--orange))">س</div>
+            <div>
+              <div class="testi-name">السيد سعيد</div>
+              <div class="testi-role">ولي أمر تلميذ – السنة 2 متوسط</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">شكراً لأكاديمية تحقيق الطموح على مجهوداتها الجبارة. نتمنى لكم مزيداً من التوفيق والنجاح.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--dark-blue),var(--sky))">ن</div>
+            <div>
+              <div class="testi-name">أم نور</div>
+              <div class="testi-role">ولية أمر تلميذة – السنة 1 ثانوي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav" style="margin-top:28px">
+      <button class="carousel-btn" id="testPrev"><i class="fas fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="testiDots"></div>
+      <button class="carousel-btn" id="testNext"><i class="fas fa-chevron-left"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(0,89,161,0.08); color:var(--dark-blue);">
+        <i class="fas fa-question-circle"></i> الأسئلة
+      </div>
+      <h2 class="section-title reveal">الأسئلة الشائعة</h2>
+      <p class="section-desc reveal">إجابات على أكثر الأسئلة التي يطرحها أولياء الأمور</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q">
+          <div class="faq-q-text">
+            <div class="faq-q-icon"><i class="fas fa-user-plus"></i></div>
+            هل يوجد تسجيل وكيف يتم؟
+          </div>
+          <div class="faq-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-a">
+          نعم، التسجيل مفتوح على مدار العام. يمكنك التواصل معنا عبر واتساب أو الاتصال المباشر وسيتم توجيهك خطوة بخطوة لإتمام التسجيل بكل سهولة.
+        </div>
+      </div>
+      <div class="faq-item reveal reveal-delay-2">
+        <div class="faq-q">
+          <div class="faq-q-text">
+            <div class="faq-q-icon"><i class="fas fa-clock"></i></div>
+            ما هي أوقات الدراسة؟
+          </div>
+          <div class="faq-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-a">
+          تعمل الأكاديمية من الساعة 8 صباحاً حتى 8 مساءً، من السبت إلى الخميس. يتم تحديد جداول خاصة لكل تلميذ بحسب مستواه وتوفره.
+        </div>
+      </div>
+      <div class="faq-item reveal reveal-delay-3">
+        <div class="faq-q">
+          <div class="faq-q-text">
+            <div class="faq-q-icon"><i class="fas fa-user"></i></div>
+            هل يوجد دعم فردي لكل تلميذ؟
+          </div>
+          <div class="faq-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-a">
+          بالتأكيد! نوفر متابعة فردية دقيقة لكل تلميذ، مع تشخيص نقاط الضعف ووضع خطة علاجية مخصصة لكل حالة على حدة.
+        </div>
+      </div>
+      <div class="faq-item reveal reveal-delay-4">
+        <div class="faq-q">
+          <div class="faq-q-text">
+            <div class="faq-q-icon"><i class="fas fa-chart-line"></i></div>
+            هل يتم متابعة التلاميذ وإعلام أولياء الأمور؟
+          </div>
+          <div class="faq-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-a">
+          نعم، نحرص على التواصل المستمر مع أولياء الأمور وإطلاعهم على مستوى أبنائهم وتقدمهم الدراسي بانتظام عبر التقارير الدورية.
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <div class="faq-q-text">
+            <div class="faq-q-icon"><i class="fas fa-money-bill-wave"></i></div>
+            هل أسعار الأقساط معقولة؟
+          </div>
+          <div class="faq-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-a">
+          نوفر أسعاراً في متناول الجميع مع ضمان جودة تعليمية عالية. للاستفسار عن الأسعار يرجى التواصل معنا مباشرة لأن الأسعار تختلف حسب المستوى وعدد المواد.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <div class="lb-inner" id="lbInner"></div>
+  </div>
+</div>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header center">
+      <div class="section-tag reveal" style="background:rgba(236,27,119,0.08); color:var(--pink);">
+        <i class="fas fa-envelope"></i> تواصل
+      </div>
+      <h2 class="section-title reveal">تواصل معنا</h2>
+      <p class="section-desc reveal">نحن هنا لمساعدتك في أي وقت. لا تتردد في التواصل معنا</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal reveal-delay-1">
+        <div class="contact-card-icon" style="background:rgba(37,211,102,0.1); color:#25D366;">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <h4>واتساب</h4>
+        <div class="val"><a href="https://wa.me/213665603281" target="_blank">0665603281</a></div>
+      </div>
+      <div class="contact-card reveal reveal-delay-2">
+        <div class="contact-card-icon" style="background:rgba(0,145,210,0.1); color:var(--sky);">
+          <i class="fas fa-phone"></i>
+        </div>
+        <h4>اتصال مباشر</h4>
+        <div class="val"><a href="tel:0665603281">0665603281</a></div>
+      </div>
+      <div class="contact-card reveal reveal-delay-3">
+        <div class="contact-card-icon" style="background:rgba(236,27,119,0.1); color:var(--pink);">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h4>البريد الإلكتروني</h4>
+        <div class="val" style="font-size:14px"><a href="mailto:hibat3802@gmail.com">hibat3802@gmail.com</a></div>
+      </div>
+      <div class="contact-card reveal reveal-delay-4">
+        <div class="contact-card-icon" style="background:rgba(0,89,161,0.1); color:var(--dark-blue);">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h4>الموقع</h4>
+        <div class="val" style="font-size:15px">الشلف، الجزائر</div>
+      </div>
+    </div>
+    <div class="contact-wa-section reveal">
+      <p style="font-size:16px; color:var(--text-light); margin-bottom:24px; font-weight:600;">
+        للتسجيل والاستفسار تواصل معنا مباشرة عبر واتساب 👇
+      </p>
+      <a href="https://wa.me/213665603281?text=السلام عليكم، أريد الاستفسار عن التسجيل في الأكاديمية" target="_blank" class="btn-wa-big">
+        <i class="fab fa-whatsapp" style="font-size:24px"></i>
+        ابدأ المحادثة الآن
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <div class="logo-icon">🎓</div>
+          <div>
+            <h3>أكاديمية تحقيق الطموح</h3>
+            <p style="font-size:12px; opacity:0.6; margin:0;">تعلم – تطوير – تميز</p>
+          </div>
+        </div>
+        <p>أكاديمية تعليمية متخصصة في الدعم المدرسي لجميع المستويات، تعمل على تحسين نتائج التلاميذ وبناء مستقبلهم.</p>
+        <div class="social-links">
+          <a href="https://wa.me/213665603281" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="tel:0665603281" class="social-link"><i class="fas fa-phone"></i></a>
+          <a href="mailto:hibat3802@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul class="footer-links">
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#team">الفريق</a></li>
+          <li><a href="#levels">المستويات</a></li>
+          <li><a href="#activities">الأنشطة</a></li>
+          <li><a href="#testimonials">الآراء</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <ul class="footer-links">
+          <li><a href="tel:0665603281">📞 0665603281</a></li>
+          <li><a href="mailto:hibat3802@gmail.com">✉️ hibat3802@gmail.com</a></li>
+          <li><a href="#location">📍 الشلف، الجزائر</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 أكاديمية تحقيق الطموح — جميع الحقوق محفوظة</span>
+      <span>صُنع من طرف merox digital بكل حب</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ─── NAVBAR SCROLL ─── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  /* ─── HAMBURGER ─── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    hamburger.classList.toggle('active', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  });
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* Close menu when clicking outside */
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  /* ─── SCROLL REVEAL ─── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ─── ACTIVITIES CAROUSEL ─── */
+  let actIdx = 0;
+  const actTrack = document.getElementById('activitiesTrack');
+  const actDots = document.querySelectorAll('#actDots .carousel-dot');
+  const totalSlides = 3;
+
+  function goToSlide(idx) {
+    actIdx = (idx + totalSlides) % totalSlides;
+    actTrack.style.transform = `translateX(${actIdx * 100}%)`;
+    actDots.forEach((d, i) => d.classList.toggle('active', i === actIdx));
+  }
+
+  document.getElementById('actNext').addEventListener('click', () => goToSlide(actIdx + 1));
+  document.getElementById('actPrev').addEventListener('click', () => goToSlide(actIdx - 1));
+
+  let actAuto = setInterval(() => goToSlide(actIdx + 1), 4000);
+  actTrack.parentElement.addEventListener('mouseenter', () => clearInterval(actAuto));
+  actTrack.parentElement.addEventListener('mouseleave', () => {
+    clearInterval(actAuto);
+    actAuto = setInterval(() => goToSlide(actIdx + 1), 4000);
+  });
+
+  /* Touch swipe for activities carousel */
+  let actTouchStart = 0;
+  actTrack.addEventListener('touchstart', e => { actTouchStart = e.touches[0].clientX; }, { passive: true });
+  actTrack.addEventListener('touchend', e => {
+    const diff = actTouchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goToSlide(diff > 0 ? actIdx + 1 : actIdx - 1);
+  });
+
+  /* ─── TESTIMONIALS CAROUSEL ─── */
+  let testiIdx = 0;
+  const testiTrack = document.getElementById('testiTrack');
+  const testiCards = Array.from(testiTrack.querySelectorAll('.testi-card'));
+  const testiDotsContainer = document.getElementById('testiDots');
+
+  function getVisibleCount() {
+    return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+  }
+
+  function buildTestiDots() {
+    const vc = getVisibleCount();
+    const total = Math.ceil(testiCards.length / vc);
+    testiDotsContainer.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToTesti(i));
+      testiDotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateTestiLayout() {
+    const vc = getVisibleCount();
+    const cardWidthPct = 100 / vc;
+    const gapPx = 28;
+    testiCards.forEach(c => {
+      c.style.width = `calc(${cardWidthPct}% - ${gapPx * (vc - 1) / vc}px)`;
+      c.style.minWidth = `calc(${cardWidthPct}% - ${gapPx * (vc - 1) / vc}px)`;
+      c.style.flexShrink = '0';
+    });
+    const maxIdx = Math.max(0, testiCards.length - vc);
+    if (testiIdx > maxIdx) testiIdx = maxIdx;
+    goToTesti(testiIdx);
+    buildTestiDots();
+  }
+
+  function goToTesti(idx) {
+    const vc = getVisibleCount();
+    const maxIdx = Math.max(0, testiCards.length - vc);
+    testiIdx = Math.max(0, Math.min(idx, maxIdx));
+    const cardWidthPct = 100 / vc;
+    const shift = -(testiIdx * cardWidthPct);
+    testiTrack.style.transform = `translateX(${shift}%)`;
+    const dots = testiDotsContainer.querySelectorAll('.carousel-dot');
+    const activeDot = Math.floor(testiIdx / 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === Math.ceil(testiIdx / vc) || (testiIdx === 0 && i === 0)));
+    /* simpler dot logic */
+    dots.forEach((d, i) => d.classList.toggle('active', i === Math.floor(testiIdx * vc / vc) || false));
+    if (dots.length) {
+      dots.forEach(d => d.classList.remove('active'));
+      const di = Math.min(Math.floor(testiIdx * vc / testiCards.length * dots.length), dots.length - 1);
+      if (dots[di]) dots[di].classList.add('active');
+    }
+  }
+
+  document.getElementById('testNext').addEventListener('click', () => {
+    const vc = getVisibleCount();
+    goToTesti(testiIdx + 1);
+  });
+  document.getElementById('testPrev').addEventListener('click', () => {
+    goToTesti(testiIdx - 1);
+  });
+
+  /* Touch swipe for testimonials */
+  let testiTouchStart = 0;
+  testiTrack.addEventListener('touchstart', e => { testiTouchStart = e.touches[0].clientX; }, { passive: true });
+  testiTrack.addEventListener('touchend', e => {
+    const diff = testiTouchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goToTesti(diff > 0 ? testiIdx + 1 : testiIdx - 1);
+  });
+
+  window.addEventListener('resize', updateTestiLayout);
+  updateTestiLayout();
+
+  /* ─── FAQ ACCORDION ─── */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ─── LIGHTBOX ─── */
+  const galleryData = [
+    { bg: 'linear-gradient(135deg,#0091D2,#0059A1)', icon: '📚' },
+    { bg: 'linear-gradient(135deg,#EC1B77,#F05A94)', icon: '🎓' },
+    { bg: 'linear-gradient(135deg,#FF8200,#FFB500)', icon: '📝' },
+    { bg: 'linear-gradient(135deg,#0059A1,#EC1B77)', icon: '🏆' },
+    { bg: 'linear-gradient(135deg,#FFB500,#FF8200)', icon: '⭐' },
+    { bg: 'linear-gradient(135deg,#F05A94,#0091D2)', icon: '🎯' }
+  ];
+  const lightbox = document.getElementById('lightbox');
+  const lbInner = document.getElementById('lbInner');
+
+  function openLightbox(idx) {
+    const d = galleryData[idx];
+    lbInner.style.background = d.bg;
+    lbInner.style.fontSize = '8rem';
+    lbInner.textContent = d.icon;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ─── SMOOTH SCROLL ─── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
